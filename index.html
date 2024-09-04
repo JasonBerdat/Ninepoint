@@ -1,0 +1,683 @@
+<html>
+<head>
+    <title>Web Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.container {
+    text-align: center;
+    background-color: #e0e0e0;
+    padding: 100px 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header .logo {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.header .menu {
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.header:hover {
+    background-color: black;
+}
+
+.header:hover .logo,
+.header:hover .menu {
+    color: white;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    transition: right 0.2s ease;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.sidebar .section-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+}
+
+.sidebar .section-list li {
+    padding: 15px 20px;
+    /* border-bottom: 1px solid #ccc; */
+}
+
+.sidebar .section-list li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: block;
+    font-weight: bold;
+}
+
+/* Add line separators between sections */
+.sidebar .section-list li:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 25%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+
+/* Sidebar open state */
+.sidebar.open {
+    right: 0;
+}
+
+/* Change menu icon to X when open */
+.menu.open i::before {
+    content: "\f00d";
+    /* FontAwesome 'times' icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.section {
+    padding: 300px 20px;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+.section h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #666666;
+    margin-top: -50px;
+}
+
+.section p {
+    font-size: 16px;
+    color: #666666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section .intro {
+    font-size: 44px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3b3b3b;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #f5f5f5;
+}
+
+.content .box {
+    background-color: #6b6b6b;
+    width: 770px;
+    height: 400px;
+    margin-left: -50px;
+}
+
+.content .text {
+    text-align: left;
+    max-width: 45%;
+}
+
+.content .text h2 {
+    font-size: 33px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.content .text h4 {
+    font-size: 45px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #3b3b3b;
+}
+
+.content .text p {
+    font-size: 22px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+
+
+.content .text .link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #838383;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 44px;
+    height: 17px;
+}
+
+.content-2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #f5f5f5;
+}
+
+.content-2 .box-2 {
+    background-color: #6b6b6b;
+    width: 770px;
+    height: 400px;
+    margin-right: -50px
+}
+
+.content-2 .text-2 {
+    text-align: left;
+    max-width: 45%;
+}
+
+.content-2 .text-2 h2 {
+    font-size: 33px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.content-2 .text-2 h4 {
+    font-size: 45px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #3b3b3b;
+}
+
+.content-2 .text-2 p {
+    font-size: 22px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.content-2 .text-2 .link-2 {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #838383;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 44px;
+    height: 17px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 60px 20px;
+    background-color: #e0e0e0;
+}
+
+.grid .item {
+    background-color: #6b6b6b;
+    width: 26%;
+    height: 240px;
+    margin-bottom: 20px;
+}
+
+.grid .item h2 {
+    font-size: 25px;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.grid .item p {
+    font-size: 20px;
+    color: #d4d4d4;
+    padding: 10px;
+}
+
+
+.grid .item .link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: #b0b0b0;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Style the select dropdown */
+select {
+    width: 220px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Style the actual select element */
+.select select {
+    appearance: none;
+    /* background: transparent; */
+    border: none;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    outline: none;
+}
+
+/* Style the arrow (caret) */
+.select::after {
+    /* content: "▼"; */
+    font-size: 12px;
+    color: #000;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Dropdown items styling */
+.select select option {
+    background-color: #FFFFFF;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Hover and focus states for better UI */
+.select select:hover,
+.select select:focus {
+    border-color: #888;
+    outline: none;
+}
+
+/* Popup container */
+.popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 1000px;
+    height: 600px;
+    text-align: center;
+    box-shadow: 0px 0px 10px #000;
+    border-radius: 10px;
+}
+
+.popup .popup-content #popupMessage {
+    font-size: 35px;
+    margin-top: 275px;
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#item-1 {
+    width: 250px;
+    height: 350px;
+    margin-top: -50px;
+    margin-left: 95px;
+}
+
+#item-2 {
+    margin-top: 200px;
+    width: 250px;
+    height: 350px;
+}
+
+#item-3 {
+    width: 250px;
+    height: 350px;
+    margin-top: -50px;
+    margin-right: 95px;
+}
+
+#item-4 {
+    margin-top: -200px;
+    height: 250px;
+    width: 250px;
+}
+
+#item-5 {
+    margin-top: -200px;
+    width: 420px;
+}
+
+
+.grid .select {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.grid .select select {
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.footer {
+    padding: 100px 60px;
+    text-align: left;
+    background-color: #f5f5f5;
+}
+
+.footer .box {
+    background-color: #6b6b6b;
+    width: 20%;
+    height: 220px;
+    display: inline-block;
+    margin: 0 10px;
+    margin-left: 140px;
+}
+
+.footer .box h2 {
+    font-size: 25px;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.footer .box p {
+    font-size: 20px;
+    color: #d4d4d4;
+    padding: 10px;
+    margin-top: -30px;
+}
+
+.footer .box .link {
+    display: flex-box;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: #6b6b6b;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.footer .images {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 250px;
+    padding: 150px 50px;
+    margin-top: 200px;
+    margin-left: 170px;
+    background-color: #e0e0e0;
+}
+
+.footer .images .image-1 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-bottom: 200px;
+    margin-top: -240px;
+    margin-left: -130px;
+}
+
+.footer .images .image-2 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-top: -230px;
+    margin-left: -100px;
+}
+
+.footer .images .image-3 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-left: -100px;
+    margin-top: -40px;
+}
+
+.footer .images .image-4 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-top: 160px;
+    margin-left: -100px;
+}
+
+.footer .images .image-5 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-top: 350px;
+    margin-left: -100px;
+}
+
+.footer .images .image-6 {
+    background-color: #b0b0b0;
+    width: 450px;
+    height: 200px;
+    margin: 0 5px;
+    margin-top: 550px;
+    margin-left: -100px;
+    margin-right: -170px;
+}
+    </style>
+</head>
+<body>
+    <div id="header" class="header">
+        <div class="logo">9.</div>
+        <div class="menu" id="menuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" id="closeBtn">&times;</div>
+        <ul class="section-list">
+            <li><a href="#header">Section 1</a></li>
+            <li><a href="#section">Section 2</a></li>
+            <li><a href="#content">Section 3</a></li>
+            <li><a href="#grid">Section 4</a></li>
+            <li><a href="#footer">Section 5</a></li>
+            <li><a href="#images">Section 6</a></li>
+        </ul>
+    </div>
+
+    <div id="section" class="section">
+        <h1>Heading</h1>
+        <div class="intro">Introduction</div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="content" class="content">
+        <div class="box"></div>
+        <div class="text">
+            <h2>Heading</h2>
+            <h4>Title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali.</p>
+            <a href="#" class="link">LINK</a>
+        </div>
+    </div>
+    <div class="content-2">
+        <div class="text-2">
+            <h2>Heading</h2>
+            <h4>Title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali.</p>
+            <a href="#" class="link-2">LINK</a>
+        </div>
+        <div class="box-2"></div>
+    </div>
+    <div id="grid" class="grid">
+        <div class="select">
+            <select id="dropdown">
+                <option value="">Select</option>
+                <option value="Item 1">Item 1</option>
+                <option value="Item 2">Item 2</option>
+                <option value="Item 3">Item 3</option>
+            </select>
+        </div>
+        <!-- Popup Structure -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span id="closePopup" class="close">&times;</span>
+                <p id="popupMessage">You selected an item!</p>
+            </div>
+        </div>
+        <div class="item" id="item-1">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+        </div>
+        <div class="item" id="item-2">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+        </div>
+        <div class="item" id="item-3">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+        </div>
+        <div class="item" id="item-4" style="margin-right: 300px;">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+        </div>
+        <div class="item" id="item-5" style="margin-left: -70px;">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+        </div>
+    </div>
+    <div id="footer" class="footer">
+        <div class="box">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            <a href="#" class="link">LINK</a>
+        </div>
+        <div class="box">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            <a href="#" class="link">LINK</a>
+        </div>
+        <div class="box">
+            <h2>Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            <a href="#" class="link">LINK</a>
+        </div>
+        <div id="images" class="images">
+            <div class="image-1"></div>
+            <div class="image-2" style="background-color: #ffffff;"></div>
+            <div class="image-3"></div>
+            <div class="image-4" style="background-color: #ffffff;"></div>
+            <div class="image-5"></div>
+            <div class="image-6" style="background-color: #ffffff;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menuIcon').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('menuIcon').classList.add('open');
+});
+
+document.getElementById('closeBtn').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('menuIcon').classList.remove('open');
+});
+
+
+document.getElementById('dropdown').addEventListener('change', function () {
+    var selectedValue = this.value;
+
+    if (selectedValue) {
+        document.getElementById('popupMessage').innerText = selectedValue;
+        document.getElementById('popup').style.display = 'flex'; // Show the popup
+    }
+});
+
+document.getElementById('closePopup').addEventListener('click', function () {
+    document.getElementById('popup').style.display = 'none'; // Close the popup
+});
+
+// Close the popup if user clicks outside the popup content
+window.onclick = function (event) {
+    var popup = document.getElementById('popup');
+    if (event.target == popup) {
+        popup.style.display = 'none';
+    }
+}
+    </script>
+</body>
+</html>
